@@ -1,0 +1,35 @@
+{% extends "bases/base.html" %}
+{% load static %}
+
+{% block 'head' %}
+<link href="{% static 'cadastro/css/css.css' %}" rel="stylesheet">
+{% endblock 'head' %}
+
+
+
+{% block 'conteudo' %}
+    <div class="container centralizar full_cadastro">
+        <div class="cadastro col-md-9">
+          <h3 class="font-destaque">Cadastre-se</h3>
+          <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
+            <div class="row informacoes">
+              <input type="text" class="input-default" name="primeiro_nome" placeholder="Nome">  
+              <input type="text" class="input-default" name="sobrenome" placeholder="Sobrenome">
+              <input type="email" class="input-default" name="email" placeholder="E-mail">
+              <input type="password" class="input-default" name="senha" placeholder="Senha">
+              <input type="password" class="input-default" name="confirmar_senha" placeholder="Confirmar senha">
+            </div>
+          <br>
+          <input type="submit" class="btn-default" value="Enviar">
+        </div>
+      </form>
+    </div>
+<div class="container">
+  {% if messages %}
+      <br>
+      {% for message in messages %}
+      <div class="alert {{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
